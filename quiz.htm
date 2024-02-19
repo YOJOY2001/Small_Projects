@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+</head>
+<body>
+    <div class="panel">
+        <h1>Quiz On Javascript Basics</h1>
+        Your_Name:
+        <input type="text" id="name" placeholder="enter your name" />
+        <div id="cont"></div>
+        <div class="question" id="ques"></div>
+        <!-- <div class="options" id="opt"></div> -->
+        <button onclick="checkAns()" id="btn">SUBMIT</button><br><br>
+        <div id="score" style="height: 150px;width: 35%;"></div>
+    </div>
+    <script>
+        const Questions = [{
+        q: "Javascript is an _______ language?",
+        a: [{ text: "Object-Oriented", isCorrect: true,isSelected: false },
+        { text: "Object-Based", isCorrect: false,isSelected: false },
+        { text: "Procedural", isCorrect: false,isSelected: false },
+        { text: "None of the above", isCorrect: false,isSelected: false }
+        ]
+    
+    },
+    {
+        q: "Which of the following keywords is used to define a variable in Javascript?",
+        a: [{ text: "var", isCorrect: false },
+        { text: "let", isCorrect: false },
+        { text: "Both A and B", isCorrect: true },
+        { text: "None of the above", isCorrect: false }
+        ]
+    
+    },
+    {
+        q: "Which of the following methods is used to access HTML elements using Javascript?",
+        a: [{ text: "getElementById()", isCorrect: false },
+        { text: "getElementByClassName()", isCorrect: false },
+        { text: "Both A and B", isCorrect: true },
+        { text: "None of the above", isCorrect: false }
+        ]
+    
+    },
+    {
+        q: "Upon encountering empty statements, what does the Javascript Interpreter do?",
+        a: [{ text: "Throws an error", isCorrect: false, isSelected: false },
+        { text: "Ignores the statements", isCorrect: true },
+        { text: "Gives a warning", isCorrect: false },
+        { text: "None of the above", isCorrect: false}
+        ]
+    
+    },
+    {
+        q: "Which of the following methods can be used to display data in some form using Javascript?",
+        a: [{ text: "document.write()", isCorrect: false },
+        { text: "console.log()", isCorrect: false },
+        { text: "window.alert()", isCorrect: false },
+        { text: "All of the above", isCorrect: true }
+        ]
+    
+    },
+    {
+        q: "How can a datatype be declared to be a constant type?",
+        a: [{ text: "const", isCorrect: true },
+        { text: "var", isCorrect: false },
+        { text: "let", isCorrect: false },
+        { text: "constant", isCorrect: false }
+        ]
+    
+    },
+    {
+        q: "What keyword is used to check whether a given property is valid or not?",
+        a: [{ text: "in", isCorrect: true },
+        { text: "is in", isCorrect: false },
+        { text: "exists", isCorrect: false },
+        { text: "lies", isCorrect: false }
+        ]
+    
+    },
+    {
+        q: "When an operator’s value is NULL, the typeof returned by the unary operator is:",
+        a: [{ text: "boolean", isCorrect: false },
+        { text: "undefined", isCorrect: false },
+        { text: "object", isCorrect: true },
+        { text: "integer", isCorrect: false }
+        ]
+    
+    },
+    {
+        q: "What will be the output of the following code snippet? [var a = true + true + true * 3]",
+        a: [{ text: "3", isCorrect: false },
+        { text: "0", isCorrect: false },
+        { text: "error", isCorrect: false },
+        { text: "5", isCorrect: true }
+        ]
+    
+    },
+    {
+        q: "What is the output of the following code snippet? [print(NaN === NaN)]",
+        a: [{ text: "true", isCorrect: false,isSelected: false },
+        { text: "false", isCorrect: true,isSelected: false },
+        { text: "undefined", isCorrect: false,isSelected: false },
+        { text: "error", isCorrect: false,isSelected: false }
+        ]
+    
+    }
+    
+    ]
+    console.log(Questions.length);
+    
+    let currQuestion = 0
+    let score = 0
+    
+    function loadQues() {
+        // let cont = document.getElementById("cont")
+        const question = document.getElementById("ques")
+        const ol=document.createElement("ol")
+        for(let j=0;j<Questions.length;j++)
+        {
+            const li=document.createElement("li")
+            li.textContent = Questions[j].q;
+            // console.log(Questions[j].q);
+            ol.appendChild(li);
+            
+            // cont.appendChild(question);
+            // opt.innerHTML = ""
+            for (let i = 0; i < Questions[j].a.length; i++) {
+                const opt = document.createElement("div");
+                const choice = document.createElement("input");
+                const choiceLabel = document.createElement("label");
+        
+                choice.type = "radio";
+                choice.name = "answer"+j;
+                choice.value = i;
+                // console.log(choice);
+                choiceLabel.textContent = Questions[j].a[i].text;
+                opt.appendChild(choice);
+                opt.appendChild(choiceLabel);
+                ol.appendChild(opt)
+            }
+            // ol.appendChild(li);
+        }
+        question.appendChild(ol);
+        
+    }
+    
+    loadQues();
+    
+    function loadScore() {
+        let totScor = document.getElementById("score")
+        // totScor.style.borderColor="black"
+        totScor.style.border="thin solid black"
+        totScor.style.boxShadow="10px 10px 8px black"
+        totScor.style.margin="25px"
+        totScor.style.backgroundColor = "powderblue";
+        let name=document.getElementById("name")
+        totScor.innerHTML=""
+        let percent=(score/Questions.length)*100
+        // totalScore.textContent = `You scored ${score} out of ${Questions.length}Percentage:${percent}`
+        totScor.innerHTML=`<p>Player Name:${name.value}<br>You scored: ${score} out of ${Questions.length}<br>Percentage:${percent}%</p>`
+        score=0;
+        name.value=''
+        
+    }
+     
+    function checkAns() {
+        for(let j=0;j<Questions.length;j++){
+            let selectedAns = parseInt(document.querySelector(`input[name=${"answer"+j}]:checked`).value);
+            // console.log("select",selectedAns);
+            let selected = document.querySelector(`input[name=${"answer"+j}]`);
+            console.log(selected.checked);
+            if (Questions[j].a[selectedAns].isCorrect) {
+                score++;
+                console.log("Correct")
+            }
+        }
+        clearRadioButtons()
+        loadScore()
+    }
+    function clearRadioButtons(){
+        var ele = document.querySelectorAll("input[type=radio]");
+        for(var i=0;i<ele.length;i++){
+            ele[i].checked = false;
+        }
+    }
+    </script>
+</body>
+</html>

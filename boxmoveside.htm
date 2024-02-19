@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+    href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
+    <title>Box-Slide</title>
+    <style>
+        *{
+            font-family: sans-serif;
+            background-color: rgb(236, 237, 164);
+        }
+        #box{
+            position: absolute;
+            left: 300px;
+            top: 200px;
+            width: 150px;
+            height: 90px;
+            background-color: rgba(121, 115, 115, 0.733);
+        }
+        .key2{
+            float: right;
+        }
+        .keys{
+            color: rgb(218, 48, 48);
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <br><br>
+        <button onclick="move_img('left')" class="keys"><i class="fa-solid fa-arrow-left"></i></button>
+        <button onclick="move_img('right')" class="keys key2"><i class="fa-solid fa-arrow-right"></i></button><br>
+    </div>
+    <script>
+        document.addEventListener('keydown',logkey);
+        function logkey(e){
+            switch (e.keyCode) {
+                case 37:
+                    move_img('left')
+                    break;
+                case 39:
+                    move_img('right')
+                    break;
+            
+                default:
+                    break;
+            }
+        }
+        function move_img(str)
+        {
+            var step=100;
+            switch (str) {
+                case 'left':
+                    var x=document.getElementById('box').offsetLeft;
+                    x=x-step;
+                    document.getElementById('box').style.left=x+'px';
+                    break;
+                case 'right':
+                    var x=document.getElementById('box').offsetLeft;
+                    x=x+step;
+                    document.getElementById('box').style.left=x+'px';
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

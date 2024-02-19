@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assignment 5</title>
+</head>
+<body>
+    <h1>CURRENCY COUNTER...</h1>
+    <script>
+        let a=Number(prompt("Enter the amount:"))
+        let n=0
+
+        if (a>=2000) {
+            n=a/2000
+            a=a%2000
+            console.log("No of 2000:"+parseInt(n));
+        }
+      
+        if(a>=500){
+            n=a/500
+            a=a%500
+            console.log("No of 500:"+parseInt(n));
+        }
+            
+        if (a>=100) {
+            n=a/100
+            asserts=a%100
+            console.log("No of 100:"+parseInt(n));
+        }
+            
+        if (a>=50) {
+            n=a/50
+            a=a%50
+            console.log("No of 50:"+parseInt(n));
+        }
+
+        if (a>=10) {
+            n=a/10
+            a=a%10
+            console.log("No of 10:"+parseInt(n));
+        }
+
+        if (a>=5) {
+            n=a/5
+            a=a%5
+            console.log("No of 5:"+parseInt(n));
+        }
+
+        if (a>=1) {
+            n=a/1
+            a=a%1
+            console.log("No of 1:"+parseInt(n));
+        }
+    </script>
+</body>
+</html>

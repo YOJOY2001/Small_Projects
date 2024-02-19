@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+    href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
+
+    <title>Box-Controller</title>
+    <style>
+        *{
+            font-family: sans-serif;
+            background-color: rgba(229, 244, 61, 0.842);
+        }
+        #box{
+            position: absolute;
+            left: 300px;
+            top: 200px;
+            width: 80px;
+            height: 70px;
+            background-color: red;
+        }
+        .keys{
+            padding: 10px;
+            background-color: blueviolet;
+            color: white;
+        }
+        .updo{
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <input type="button" onclick="move_img('up')" value="UP" class="updo keys"><br>
+    <input type="button" onclick="move_img('left')" value="LEFT" class="keys">
+    <input type="button" onclick="move_img('right')" value="RIGHT" class="keys"><br>
+    <input type="button" onclick="move_img('down')" value="DOWN" class="updo keys">
+    
+    <script>
+        function move_img(str){
+            var step=50;
+            switch(str){
+                case 'down':
+                    var x=document.getElementById('box').offsetTop;
+                    console.log(x);
+                    x=x+step;
+                    document.getElementById('box').style.top=x+'px';
+                    break;
+                case 'up':
+                    var x=document.getElementById('box').offsetTop;
+                    // console.log(x);
+                    x=x-step;
+                    document.getElementById('box').style.top=x+'px';
+                    break;
+                case 'left':
+                    var y=document.getElementById('box').offsetLeft;
+                    y=y-step;
+                    document.getElementById('box').style.left=y+'px';
+                    break;
+                case 'right':
+                    var y=document.getElementById('box').offsetLeft;
+                    y=y+step;
+                    document.getElementById('box').style.left=y+'px';
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <style>
+        #main{
+            background-color: rgb(117, 3, 3);
+            color: white;
+            width: 400px;
+            height: 100vh;
+            margin:auto;
+            border-radius: 20px;
+            box-shadow: 0px 0px 15px black;
+            border:1px solid black
+            
+        }
+        #display{
+            padding: 15px;
+        }
+        #display input{
+            width: 80%;
+            margin-left: 20px;
+            margin-top: 40px;
+            height:7vh ;
+            border-radius:2px ;
+            font-size: xx-large;
+            display: flex;
+            overflow: hidden;
+            background-color: black;
+            opacity: 0.7;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px black;
+            box-shadow: 0px 5px 15px black;
+        }
+        #buttons{
+            display: grid;
+            grid-template-columns: repeat(4,70px);
+            justify-content: space-evenly;
+            margin-top: 70px;
+        }
+        .cells{
+            border: 1px solid black;
+            height: 40px;
+            margin-top: 15px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: x-large;
+            background-color: rgba(255, 255, 255, 0.943);
+            /* opacity: 0.7; */
+            color: black;
+            padding-top: 20px;
+            padding-bottom:10px;
+
+        }
+        .cell1{
+            background-color: orange;
+        }
+        .cell2{
+            background-color:black ;
+            color:white;
+        }
+        .cells:hover{
+            background-color: lightskyblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="display">
+            <input type="text" id="screen"  value="" autofocus onkeydown="calculate(event)" onchange="testfun(this.value)"> 
+        </div>
+        <div id="buttons" onclick="handleButtonClick(event)">
+            <div class="bton cells cell1">AC</div>
+            <div class="cells cell1" onclick="render()">DEL</div>
+            <div class="bton cells cell2">%</div>
+            <div class="bton cells cell2">/</div>
+            <div class="bton cells">7</div>
+            <div class="bton cells">8</div>
+            <div class="bton cells">9</div>
+            <div class="bton cells cell2">*</div>
+            <div class="bton cells">4</div>
+            <div class="bton cells">5</div>
+            <div class="bton cells">6</div>
+            <div class="bton cells cell2">-</div>
+            <div class="bton cells">1</div>
+            <div class="bton cells">2</div>
+            <div class="bton cells">3</div>
+            <div class="bton cells cell2">+</div>
+            <div class="bton cells">00</div>
+            <div class="bton cells">0</div>
+            <div class="bton cells">.</div>
+            <div class="bton cells cell1">=</div>
+        </div>      
+    </div>
+    
+    <script>
+        
+        if(document.getElementById("screen").value !== ""){
+            var a = document.getElementById("screen").value
+        }
+        let btn=document.querySelectorAll("#buttons>div");
+        
+        let bag="";
+
+        function render(){
+
+            const inputElement = document.getElementById("screen");
+            const currentValue = inputElement.value;
+            if (currentValue.length > 0) {
+                // Remove the last character from the screen
+                inputElement.value = currentValue.slice(0, -1);
+                // Remove the last character from the bag
+                bag = bag.slice(0, -1);
+            }
+        }
+
+
+
+        function calculate(event){
+            // console.log(event);
+          
+
+           if(!(event.keyCode > 95 && event.keyCode < 112) && event.keyCode !== 16){
+            render()
+             
+           }
+
+           if(event.keyCode === (13 || 187)){
+            myFunc()
+           }
+
+        //    console.log(event);
+        }
+
+        function myFunc(event) {
+
+            let val=document.getElementById("screen").value
+     
+            let TargetNumber= event? event.target.innerText : "="        
+            if(TargetNumber=="AC"){
+                bag="";
+                document.querySelector("#screen").value="";
+            }
+            else if (TargetNumber=="=") {
+                
+                    document.querySelector("#screen").value = eval(val)
+                
+            }
+            else if (TargetNumber == "DEL") {
+                // document.querySelector("#screen").value ="";
+                render();
+            }
+            else if(TargetNumber >= 1&&TargetNumber<=9||TargetNumber == "+"||TargetNumber == "-"
+                    ||TargetNumber == "/"||TargetNumber == "*"||TargetNumber == "%")
+            {
+                bag = bag + TargetNumber;
+                document.querySelector("#screen").value = bag;
+            }
+        }
+
+        function handleButtonClick(event) {
+            if (event.target.classList.contains("bton")) {
+                myFunc(event);
+            }
+        }
+    </script>
+</body>
+</html>

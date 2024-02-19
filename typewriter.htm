@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typewriter</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        .container{
+           width: 100%;
+           height: 100vh; 
+           background-color: aquamarine;
+        }
+        .box1{
+            height: 50%;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.276),rgba(0, 0, 0, 0.276));
+            position: relative;
+        }
+        .content{
+            position: absolute;
+            left: 300px;
+            top: 120px;
+            
+        }
+        .btn{
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box1">
+            <div class="content">
+                <input type="text" class="btn" id="inp" placeholder="Enter Something" autofocus>
+                <button type="submit" class="btn" onclick="myfunc()"><h4>Submit</h4></button>
+            </div>
+        </div>
+        <div id="box2">
+            <h1>Total Word:0</h1>
+            <h1>Total Letter:0</h1>
+        </div>
+    </div>
+    <script>
+        let box2=document.getElementById('box2')
+        let inp=document.getElementById('inp')
+        function myfunc(){
+            // console.log("hi");
+            let x=inp.value;
+            let count=0;
+            let y=x.length
+            console.log(x);
+            if(x=='')
+            {
+                alert("Please enter something")
+            }
+            else{
+
+                for(i=0;i<y;i++)
+                {
+                    if(x[i]==' '){
+                        count++
+                    }
+                    else if(x[i]=='.'){
+                        y--
+                    }
+                }
+                inp.value='';
+                box2.innerHTML=`<h1>Total Word:${y-count}</h1>
+                <h1>Total Letter:${count+1}</h1>`
+            }
+        }
+    </script>
+</body>
+</html>
